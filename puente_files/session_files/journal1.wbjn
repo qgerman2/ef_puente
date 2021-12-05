@@ -1,0 +1,83 @@
+# encoding: utf-8
+# 2021 R2
+SetScriptVersion(Version="21.2.209")
+template1 = GetTemplate(
+    TemplateName="Static Structural",
+    Solver="ANSYS")
+system1 = template1.CreateSystem()
+geometry1 = system1.GetContainer(ComponentName="Geometry")
+geometry1.Edit(IsSpaceClaimGeometry=True)
+geometry1.Exit()
+geometry1.Edit()
+Save(Overwrite=True)
+Save(Overwrite=True)
+geometry1.Exit()
+Save(Overwrite=True)
+modelComponent1 = system1.GetComponent(Name="Model")
+modelComponent1.Refresh()
+model1 = system1.GetContainer(ComponentName="Model")
+model1.Edit()
+model1.Exit()
+geometry1.Edit()
+Save(Overwrite=True)
+Save(Overwrite=True)
+geometry1.Exit()
+modelComponent1.Refresh()
+model1.Edit()
+Save(Overwrite=True)
+Save(Overwrite=True)
+Save(Overwrite=True)
+model1.Exit()
+geometry1.Edit()
+Save(Overwrite=True)
+geometry1.Exit()
+modelComponent1.Update(AllDependencies=True)
+model1.Edit()
+Save(Overwrite=True)
+model1.Exit()
+results1 = system1.GetContainer(ComponentName="Results")
+results1.Edit()
+model1.Exit()
+engineeringData1 = system1.GetContainer(ComponentName="Engineering Data")
+material1 = engineeringData1.GetMaterial(Name="Structural Steel")
+matlProp1 = material1.GetProperty(Name="Tensile Yield Strength")
+matlProp1.SetVariableProperty(
+    VariableName="Tensile Yield Strength",
+    Property="Unit",
+    Value="MPa")
+matlProp1.SetData(
+    Variables=["Tensile Yield Strength"],
+    Values=[["250 [MPa]"]])
+matlProp2 = material1.GetProperty(Name="Tensile Ultimate Strength")
+matlProp2.SetVariableProperty(
+    VariableName="Tensile Ultimate Strength",
+    Property="Unit",
+    Value="MPa")
+matlProp2.SetData(
+    Variables=["Tensile Ultimate Strength"],
+    Values=[["460 [MPa]"]])
+matlProp3 = material1.GetProperty(Name="Compressive Yield Strength")
+matlProp3.SetVariableProperty(
+    VariableName="Compressive Yield Strength",
+    Property="Unit",
+    Value="MPa")
+matlProp3.SetData(
+    Variables=["Compressive Yield Strength"],
+    Values=[["250 [MPa]"]])
+results1.Edit()
+Save(Overwrite=True)
+model1.Exit()
+geometry1.Edit()
+geometry1.Exit()
+modelComponent1.Update(AllDependencies=True)
+model1.Edit()
+geometry1.Edit()
+geometry1.Exit()
+model1.Exit()
+Save(Overwrite=True)
+model1.Edit()
+setup1 = system1.GetContainer(ComponentName="Setup")
+setup1.Edit()
+Save(Overwrite=True)
+model1.Exit()
+Save(Overwrite=True)
